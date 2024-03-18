@@ -12,9 +12,20 @@ import FormGroup from '@mui/material/FormGroup';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import { Container } from '@mui/material';
-import ReactPlayer from 'react-player'
+import ReactPlayer from 'react-player';
+import {makeStyles} from '@mui/styles';
+import PlayerControls from './PlayerControls';
+
+const useStyles = makeStyles({
+  playerWrapper: {
+    width: "100%",
+    position: "relative",
+  },
+});
+
 
 export default function MenuAppBar() {
+  const classes = useStyles();
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -92,9 +103,20 @@ export default function MenuAppBar() {
           )}
         </Toolbar>
       </AppBar>
-      <Container>
-      <ReactPlayer url='https://www.youtube.com/watch?v=LXb3EKWsInQ' />
+       {/* ************ Video  **********/}
+       <Container maxWidth="md">
+        <div className={classes.playerWrapper}>
+          <ReactPlayer 
+            width="100%"
+            height="100%"
+            url='https://www.youtube.com/watch?v=LXb3EKWsInQ' 
+            muted={true}
+            playing={true}
+          />
+          <PlayerControls />
+        </div>
       </Container>
     </Box>
+    
   );
 }
